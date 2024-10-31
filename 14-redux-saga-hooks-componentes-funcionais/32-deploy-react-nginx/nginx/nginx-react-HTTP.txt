@@ -1,0 +1,35 @@
+server {
+	listen 80;
+	listen [::]:80;
+  server_name IP_DO_SERVIDOR_OU_DOMINIO;
+
+  root /home/luizotavio/react1/app/build/;
+
+  if ($host != "IP_DO_SERVIDOR_OU_DOMINIO") {
+      return 404;
+ 	}
+	
+	# Add index.html
+	index index.html;
+
+	location / {
+		try_files $uri /index.html;
+	}
+
+	# deny access to .htaccess files, if Apache's document root
+	# concurs with nginx's one
+	#
+	location ~ /\.ht {
+		deny all;
+	}
+
+	location ~ /\. {
+		access_log off;
+		log_not_found off;
+		deny all;
+	}
+
+	access_log off;
+	#access_log  /var/log/nginx/IP_DO_SERVIDOR_OU_DOMINIO-access.log;
+	error_log   /var/log/nginx/IP_DO_SERVIDOR_OU_DOMINIO-error.log;
+}
