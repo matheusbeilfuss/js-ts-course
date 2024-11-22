@@ -1,33 +1,36 @@
-const globals = require("globals");
-const tseslint = require("@typescript-eslint/eslint-plugin");
-const tsParser = require("@typescript-eslint/parser");
+const globals = require('globals');
+const tseslint = require('@typescript-eslint/eslint-plugin');
+const tsParser = require('@typescript-eslint/parser');
+const prettierConfig = require('eslint-config-prettier');
 
 module.exports = [
   {
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ['**/*.ts', '**/*.tsx'],
 
     languageOptions: {
       parser: tsParser,
 
       parserOptions: {
         ecmaVersion: 11,
-        sourceType: "module",
+        sourceType: 'module',
       },
 
       globals: {
         ...globals.browser,
         ...globals.node,
-        Atomics: "readonly",
-        SharedArrayBuffer: "readonly",
+        Atomics: 'readonly',
+        SharedArrayBuffer: 'readonly',
       },
     },
 
     plugins: {
-      "@typescript-eslint": tseslint,
+      '@typescript-eslint': tseslint,
     },
 
     rules: {
       ...tseslint.configs.recommended.rules,
     },
   },
+
+  prettierConfig,
 ];
