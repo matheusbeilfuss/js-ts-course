@@ -14,3 +14,16 @@ export function createPerson( // quando há parâmetros opcionais, é necessári
     lastName,
   };
 }
+
+export function squareOf(x: any): number | null {
+  if (typeof x === 'number') return x * x;
+  return null;
+}
+
+const squareOfTwoString = squareOf('2');
+
+if (squareOfTwoString === null) {
+  console.log('Conta inválida');
+} else {
+  console.log(squareOfTwoString * 100); // TS entende que squareOfTwoString é do tipo number, pois o if anterior já verificou se é null ou não
+}
